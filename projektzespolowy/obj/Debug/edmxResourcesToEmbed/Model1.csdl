@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projektzespolowy11Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Klienci">
+    <Key>
+      <PropertyRef Name="Klienci_ID" />
+    </Key>
+    <Property Name="Klienci_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Klient_Imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Klient_Nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Klient_tel" Type="Decimal" Precision="9" Scale="0" />
+    <NavigationProperty Name="Wystapienia" Relationship="Self.FK_WYSTAPIE_RELATIONS_KLIENCI" FromRole="Klienci" ToRole="Wystapienia" />
+  </EntityType>
+  <EntityType Name="Kursy">
+    <Key>
+      <PropertyRef Name="kursy_ID" />
+    </Key>
+    <Property Name="kursy_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="miejsce_ID" Type="Int32" />
+    <Property Name="wycieczka_ID" Type="Int32" />
+    <Property Name="kurs_Godzina" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Miejsca" Relationship="Self.FK_KURSY_RELATIONS_MIEJSCA" FromRole="Kursy" ToRole="Miejsca" />
+    <NavigationProperty Name="wycieczki" Relationship="Self.FK_KURSY_RELATIONS_WYCIECZK" FromRole="Kursy" ToRole="wycieczki" />
+  </EntityType>
+  <EntityType Name="Miejsca">
+    <Key>
+      <PropertyRef Name="miejsce_ID" />
+    </Key>
+    <Property Name="miejsce_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="miejsce_typ" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="miejsce_ulica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Kursy" Relationship="Self.FK_KURSY_RELATIONS_MIEJSCA" FromRole="Miejsca" ToRole="Kursy" />
+  </EntityType>
+  <EntityType Name="Przewodnicy">
+    <Key>
+      <PropertyRef Name="przewodnik_ID" />
+    </Key>
+    <Property Name="przewodnik_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="przewodnik_Imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Przewodnik_nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="przewodnik_tel" Type="Decimal" Precision="9" Scale="0" />
+    <NavigationProperty Name="Terminy" Relationship="Self.Relationship_7" FromRole="Przewodnicy" ToRole="Terminy" />
+  </EntityType>
+  <EntityType Name="Terminy">
+    <Key>
+      <PropertyRef Name="Termin_ID" />
+    </Key>
+    <Property Name="Termin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wycieczka_ID" Type="Int32" />
+    <Property Name="Termin_Data" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="wycieczki" Relationship="Self.FK_TERMINY_RELATIONS_WYCIECZK" FromRole="Terminy" ToRole="wycieczki" />
+    <NavigationProperty Name="Wystapienia" Relationship="Self.FK_WYSTAPIE_RELATIONS_TERMINY" FromRole="Terminy" ToRole="Wystapienia" />
+    <NavigationProperty Name="Przewodnicy" Relationship="Self.Relationship_7" FromRole="Terminy" ToRole="Przewodnicy" />
+  </EntityType>
+  <EntityType Name="wycieczki">
+    <Key>
+      <PropertyRef Name="wycieczka_ID" />
+    </Key>
+    <Property Name="wycieczka_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wycieczka_nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ilosc_osob" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="zbiorka_wycieczki" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cena" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Kursy" Relationship="Self.FK_KURSY_RELATIONS_WYCIECZK" FromRole="wycieczki" ToRole="Kursy" />
+    <NavigationProperty Name="Terminy" Relationship="Self.FK_TERMINY_RELATIONS_WYCIECZK" FromRole="wycieczki" ToRole="Terminy" />
+    <NavigationProperty Name="Wymagania" Relationship="Self.Relationship_12" FromRole="wycieczki" ToRole="Wymagania" />
+  </EntityType>
+  <EntityType Name="Wymagania">
+    <Key>
+      <PropertyRef Name="Wymagania_ID" />
+    </Key>
+    <Property Name="Wymagania_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wymagania_nazwa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="wycieczki" Relationship="Self.Relationship_12" FromRole="Wymagania" ToRole="wycieczki" />
+  </EntityType>
+  <EntityType Name="Wystapienia">
+    <Key>
+      <PropertyRef Name="Wystapienia_ID" />
+    </Key>
+    <Property Name="Wystapienia_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Termin_ID" Type="Int32" />
+    <Property Name="Klienci_ID" Type="Int32" />
+    <Property Name="Oplata_za_wystapienie" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Klienci" Relationship="Self.FK_WYSTAPIE_RELATIONS_KLIENCI" FromRole="Wystapienia" ToRole="Klienci" />
+    <NavigationProperty Name="Terminy" Relationship="Self.FK_WYSTAPIE_RELATIONS_TERMINY" FromRole="Wystapienia" ToRole="Terminy" />
+  </EntityType>
+  <Association Name="FK_WYSTAPIE_RELATIONS_KLIENCI">
+    <End Role="Klienci" Type="Self.Klienci" Multiplicity="0..1" />
+    <End Role="Wystapienia" Type="Self.Wystapienia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klienci">
+        <PropertyRef Name="Klienci_ID" />
+      </Principal>
+      <Dependent Role="Wystapienia">
+        <PropertyRef Name="Klienci_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_RELATIONS_MIEJSCA">
+    <End Role="Miejsca" Type="Self.Miejsca" Multiplicity="0..1" />
+    <End Role="Kursy" Type="Self.Kursy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsca">
+        <PropertyRef Name="miejsce_ID" />
+      </Principal>
+      <Dependent Role="Kursy">
+        <PropertyRef Name="miejsce_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_RELATIONS_WYCIECZK">
+    <End Role="wycieczki" Type="Self.wycieczki" Multiplicity="0..1" />
+    <End Role="Kursy" Type="Self.Kursy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="wycieczki">
+        <PropertyRef Name="wycieczka_ID" />
+      </Principal>
+      <Dependent Role="Kursy">
+        <PropertyRef Name="wycieczka_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TERMINY_RELATIONS_WYCIECZK">
+    <End Role="wycieczki" Type="Self.wycieczki" Multiplicity="0..1" />
+    <End Role="Terminy" Type="Self.Terminy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="wycieczki">
+        <PropertyRef Name="wycieczka_ID" />
+      </Principal>
+      <Dependent Role="Terminy">
+        <PropertyRef Name="wycieczka_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WYSTAPIE_RELATIONS_TERMINY">
+    <End Role="Terminy" Type="Self.Terminy" Multiplicity="0..1" />
+    <End Role="Wystapienia" Type="Self.Wystapienia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminy">
+        <PropertyRef Name="Termin_ID" />
+      </Principal>
+      <Dependent Role="Wystapienia">
+        <PropertyRef Name="Termin_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship_12">
+    <End Role="wycieczki" Type="Self.wycieczki" Multiplicity="*" />
+    <End Role="Wymagania" Type="Self.Wymagania" Multiplicity="*" />
+  </Association>
+  <Association Name="Relationship_7">
+    <End Role="Przewodnicy" Type="Self.Przewodnicy" Multiplicity="*" />
+    <End Role="Terminy" Type="Self.Terminy" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="projektzespolowy11Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Klienci" EntityType="Self.Klienci" />
+    <EntitySet Name="Kursy" EntityType="Self.Kursy" />
+    <EntitySet Name="Miejsca" EntityType="Self.Miejsca" />
+    <EntitySet Name="Przewodnicy" EntityType="Self.Przewodnicy" />
+    <EntitySet Name="Terminy" EntityType="Self.Terminy" />
+    <EntitySet Name="wycieczki" EntityType="Self.wycieczki" />
+    <EntitySet Name="Wymagania" EntityType="Self.Wymagania" />
+    <EntitySet Name="Wystapienia" EntityType="Self.Wystapienia" />
+    <AssociationSet Name="FK_WYSTAPIE_RELATIONS_KLIENCI" Association="Self.FK_WYSTAPIE_RELATIONS_KLIENCI">
+      <End Role="Klienci" EntitySet="Klienci" />
+      <End Role="Wystapienia" EntitySet="Wystapienia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_RELATIONS_MIEJSCA" Association="Self.FK_KURSY_RELATIONS_MIEJSCA">
+      <End Role="Miejsca" EntitySet="Miejsca" />
+      <End Role="Kursy" EntitySet="Kursy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_RELATIONS_WYCIECZK" Association="Self.FK_KURSY_RELATIONS_WYCIECZK">
+      <End Role="wycieczki" EntitySet="wycieczki" />
+      <End Role="Kursy" EntitySet="Kursy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TERMINY_RELATIONS_WYCIECZK" Association="Self.FK_TERMINY_RELATIONS_WYCIECZK">
+      <End Role="wycieczki" EntitySet="wycieczki" />
+      <End Role="Terminy" EntitySet="Terminy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WYSTAPIE_RELATIONS_TERMINY" Association="Self.FK_WYSTAPIE_RELATIONS_TERMINY">
+      <End Role="Terminy" EntitySet="Terminy" />
+      <End Role="Wystapienia" EntitySet="Wystapienia" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship_12" Association="Self.Relationship_12">
+      <End Role="wycieczki" EntitySet="wycieczki" />
+      <End Role="Wymagania" EntitySet="Wymagania" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship_7" Association="Self.Relationship_7">
+      <End Role="Przewodnicy" EntitySet="Przewodnicy" />
+      <End Role="Terminy" EntitySet="Terminy" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

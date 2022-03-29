@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projektzespolowy11ModelStoreContainer" CdmEntityContainer="projektzespolowy11Entities">
+    <EntitySetMapping Name="Klienci">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Klienci">
+        <MappingFragment StoreEntitySet="Klienci">
+          <ScalarProperty Name="Klienci_ID" ColumnName="Klienci_ID" />
+          <ScalarProperty Name="Klient_Imie" ColumnName="Klient_Imie" />
+          <ScalarProperty Name="Klient_Nazwisko" ColumnName="Klient_Nazwisko" />
+          <ScalarProperty Name="Klient_tel" ColumnName="Klient_tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kursy">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Kursy">
+        <MappingFragment StoreEntitySet="Kursy">
+          <ScalarProperty Name="kursy_ID" ColumnName="kursy_ID" />
+          <ScalarProperty Name="miejsce_ID" ColumnName="miejsce_ID" />
+          <ScalarProperty Name="wycieczka_ID" ColumnName="wycieczka_ID" />
+          <ScalarProperty Name="kurs_Godzina" ColumnName="kurs_Godzina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Miejsca">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Miejsca">
+        <MappingFragment StoreEntitySet="Miejsca">
+          <ScalarProperty Name="miejsce_ID" ColumnName="miejsce_ID" />
+          <ScalarProperty Name="miejsce_typ" ColumnName="miejsce_typ" />
+          <ScalarProperty Name="miejsce_ulica" ColumnName="miejsce_ulica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Przewodnicy">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Przewodnicy">
+        <MappingFragment StoreEntitySet="Przewodnicy">
+          <ScalarProperty Name="przewodnik_ID" ColumnName="przewodnik_ID" />
+          <ScalarProperty Name="przewodnik_Imie" ColumnName="przewodnik_Imie" />
+          <ScalarProperty Name="Przewodnik_nazwisko" ColumnName="Przewodnik_nazwisko" />
+          <ScalarProperty Name="przewodnik_tel" ColumnName="przewodnik_tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Terminy">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Terminy">
+        <MappingFragment StoreEntitySet="Terminy">
+          <ScalarProperty Name="Termin_ID" ColumnName="Termin_ID" />
+          <ScalarProperty Name="wycieczka_ID" ColumnName="wycieczka_ID" />
+          <ScalarProperty Name="Termin_Data" ColumnName="Termin_Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="wycieczki">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.wycieczki">
+        <MappingFragment StoreEntitySet="wycieczki">
+          <ScalarProperty Name="wycieczka_ID" ColumnName="wycieczka_ID" />
+          <ScalarProperty Name="wycieczka_nazwa" ColumnName="wycieczka_nazwa" />
+          <ScalarProperty Name="Ilosc_osob" ColumnName="Ilosc_osob" />
+          <ScalarProperty Name="zbiorka_wycieczki" ColumnName="zbiorka_wycieczki" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wymagania">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Wymagania">
+        <MappingFragment StoreEntitySet="Wymagania">
+          <ScalarProperty Name="Wymagania_ID" ColumnName="Wymagania_ID" />
+          <ScalarProperty Name="wymagania_nazwa" ColumnName="wymagania_nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wystapienia">
+      <EntityTypeMapping TypeName="projektzespolowy11Model.Wystapienia">
+        <MappingFragment StoreEntitySet="Wystapienia">
+          <ScalarProperty Name="Wystapienia_ID" ColumnName="Wystapienia_ID" />
+          <ScalarProperty Name="Termin_ID" ColumnName="Termin_ID" />
+          <ScalarProperty Name="Klienci_ID" ColumnName="Klienci_ID" />
+          <ScalarProperty Name="Oplata_za_wystapienie" ColumnName="Oplata_za_wystapienie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Relationship_12" TypeName="projektzespolowy11Model.Relationship_12" StoreEntitySet="Relationship_12">
+      <EndProperty Name="wycieczki">
+        <ScalarProperty Name="wycieczka_ID" ColumnName="wycieczka_ID" />
+      </EndProperty>
+      <EndProperty Name="Wymagania">
+        <ScalarProperty Name="Wymagania_ID" ColumnName="Wymagania_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Relationship_7" TypeName="projektzespolowy11Model.Relationship_7" StoreEntitySet="Relationship_7">
+      <EndProperty Name="Przewodnicy">
+        <ScalarProperty Name="przewodnik_ID" ColumnName="przewodnik_ID" />
+      </EndProperty>
+      <EndProperty Name="Terminy">
+        <ScalarProperty Name="Termin_ID" ColumnName="Termin_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
